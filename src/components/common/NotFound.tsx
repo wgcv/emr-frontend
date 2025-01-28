@@ -1,11 +1,14 @@
 import { Box, Button, Container, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-
+import { ThemeToggle } from './ThemeToggle'
 export const NotFound = () => {
     const navigate = useNavigate()
 
     return (
         <Container maxWidth="md">
+            <Box sx={{ position: 'absolute', top: 16, right: 16 }}>
+                <ThemeToggle />
+            </Box>
             <Box
                 sx={{
                     display: 'flex',
