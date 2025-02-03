@@ -12,7 +12,7 @@ export const en = {
   },
   clinic: {
     title: 'Create New Clinic',
-    viewTitle: 'Clinics View',
+    viewTitle: 'Clinics',
     id: 'ID',
     name: 'Name',
     addressLine1: 'Address Line 1',
@@ -37,10 +37,15 @@ export const en = {
     }
   },
   common:{
-    search: "Search"
+    search: "Search",
+    rowPerPage: "Rows per page",
+    of: "of",
   },
   settings:{
     language: "Select language",
     theme: "Select theme",
+  },
+  footer:{
+    allRightsReserved: "All rights reserved.",
   }
 };

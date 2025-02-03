@@ -114,11 +114,9 @@ const ViewClinics: React.FC = () => {
                 <Table aria-label="clinics table">
                     <TableHead>
                         <TableRow>
-                            <TableCell sx={{ ...commonCellStyle, display: { xs: 'none', sm: 'table-cell' }, maxWidth: 100 }}>{t('clinic.id')}</TableCell>
+                            {/* <TableCell sx={{ ...commonCellStyle, display: { xs: 'none', sm: 'table-cell' }, maxWidth: 100 }}>{t('clinic.id')}</TableCell> */}
                             <TableCell sx={{ ...commonCellStyle, maxWidth: 200 }}>{t('clinic.name')}</TableCell>
-                            <TableCell sx={{ ...commonCellStyle, display: { xs: 'none', sm: 'table-cell' }, maxWidth: 200 }}>{t('clinic.addressLine1')}</TableCell>
                             <TableCell sx={{ ...commonCellStyle, maxWidth: 150 }}>{t('clinic.city')}</TableCell>
-                            <TableCell sx={{ ...commonCellStyle, maxWidth: 150 }}>{t('clinic.country')}</TableCell>
                             <TableCell sx={{ ...commonCellStyle, maxWidth: 150 }}>{t('clinic.phone')}</TableCell>
                             <TableCell sx={{ ...commonCellStyle, display: { xs: 'none', sm: 'table-cell' }, maxWidth: 200 }}>{t('clinic.email')}</TableCell>
                         </TableRow>
@@ -136,11 +134,9 @@ const ViewClinics: React.FC = () => {
                                     transition: 'background-color 0.2s ease'
                                 }}
                             >
-                                <TableCell sx={{ ...commonCellStyle, display: { xs: 'none', sm: 'table-cell' }, maxWidth: 100 }}>{clinic._id}</TableCell>
+                                {/* <TableCell sx={{ ...commonCellStyle, display: { xs: 'none', sm: 'table-cell' }, maxWidth: 100 }}>{clinic._id}</TableCell> */}
                                 <TableCell sx={{ ...commonCellStyle, maxWidth: 200 }}>{clinic.name}</TableCell>
-                                <TableCell sx={{ ...commonCellStyle, display: { xs: 'none', md: 'table-cell' }, maxWidth: 200 }}>{clinic.addressLine1}</TableCell>
                                 <TableCell sx={{ ...commonCellStyle, maxWidth: 150 }}>{clinic.city}</TableCell>
-                                <TableCell sx={{ ...commonCellStyle, maxWidth: 150 }}>{clinic.country}</TableCell>
                                 <TableCell sx={{ ...commonCellStyle, maxWidth: 150 }}>
                                     {clinic.phone.replace(/^(\d{3})(\d{3})(\d{4})$/, '($1) $2-$3')}
                                 </TableCell>
@@ -157,6 +153,10 @@ const ViewClinics: React.FC = () => {
                     page={page}
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
+                    labelDisplayedRows={({ from, to, count }) =>
+                        `${from}–${to} ${t('common.of')} ${count}`
+                    }
+                    labelRowsPerPage={t('common.rowPerPage')} // Custom text for "Rows per page"
                 />
             </TableContainer>
         </Box>

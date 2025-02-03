@@ -12,7 +12,7 @@ export const es = {
   },
   clinic: {
     title: 'Crear Nueva Clínica',
-    viewTitle: 'Vista de Clínicas',
+    viewTitle: 'Clínicas',
     id: 'ID',
     name: 'Nombre',
     addressLine1: 'Dirección Línea 1',
@@ -32,16 +32,22 @@ export const es = {
       emailRequired: 'El correo electrónico es requerido',
       emailInvalid: 'Correo electrónico inválido'
     },
-    common:{
-      search: "Búsqueda"
-    },
-    
     messages:{
       createSuccess: 'Clínica creada exitosamente',
     }
   },
+  common:{
+    search: "Búsqueda",
+    rowPerPage: "Filas por página",
+    of: "de",
+
+  },
+  
   settings:{
     language: "Seleccionar idioma",
     theme: "Seleccionar tema",
+  },
+  footer:{
+    allRightsReserved: "Todos los derechos reservados."
   }
 };

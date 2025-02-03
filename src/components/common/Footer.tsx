@@ -1,7 +1,9 @@
 import { Facebook, Instagram, LinkedIn, Twitter } from '@mui/icons-material';
 import { Box, Link, Stack, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+    const { t } = useTranslation();
     return (
         <Box
             component="footer"
@@ -41,7 +43,7 @@ const Footer = () => {
                 color="text.secondary"
                 sx={{ opacity: 0.7 }}
             >
-                ©{new Date().getFullYear()} emr.vet All rights reserved.
+                ©{new Date().getFullYear()} emr.vet {t("footer.allRightsReserved")}
             </Typography>
         </Box>
     );
