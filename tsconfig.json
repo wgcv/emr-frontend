@@ -3,5 +3,32 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "baseUrl": "src",
+    "paths": {
+      "@/*": [
+        "*"
+      ],
+      "@assets/*": [
+        "assets/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@constants/*": [
+        "constants/*"
+      ],
+      "@i18n/*": [
+        "i18n/*"
+      ],
+      "@lib/*": [
+        "lib/*"
+      ],
+      "@theme/*": [
+        "theme/*"
+      ],
+    }
+  }
 }
