@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getToken } from '../../components/auth/api/auth'
+import { getToken } from '../../components/auth/api/auth.types'
 
 export const axiosClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
