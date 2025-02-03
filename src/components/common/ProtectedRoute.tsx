@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { getRole, getToken } from '../auth/api/auth.ts';
+import { getRole, getToken } from '../auth/api/auth.types.ts';
 import { CLINIC_ROLES, PET_OWNER_ROLES, STAFF_ROLE } from '../types/User.ts';
 export const ProtectedRoute = () => {
     const token = getToken()
