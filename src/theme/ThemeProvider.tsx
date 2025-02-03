@@ -1,4 +1,4 @@
-import { createTheme, ThemeProvider as MUIThemeProvider, CssBaseline } from '@mui/material'
+import { createTheme, CssBaseline, ThemeProvider as MUIThemeProvider } from '@mui/material'
 import { createContext, useContext, useMemo, useState } from 'react'
 import getDesignTokens from './theme'
 
@@ -12,12 +12,19 @@ const ThemeContext = createContext<ThemeContextType>({} as ThemeContextType)
 export const useTheme = () => useContext(ThemeContext)
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [mode, setMode] = useState<'light' | 'dark'>('light')
+  const [mode, setMode] = useState<'light' | 'dark'>(() => {
+    // Initialize theme from localStorage or fallback to 'light'
+    return (localStorage.getItem('theme') as 'light' | 'dark') || 'light'
+  })
 
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'))
+        setMode((prevMode) => {
+          const newMode = prevMode === 'light' ? 'dark' : 'light'
+          localStorage.setItem('theme', newMode)
+          return newMode
+        })
       },
       mode,
     }),
