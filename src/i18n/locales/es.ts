@@ -13,6 +13,9 @@ export const es = {
   clinic: {
     title: 'Crear Nueva Clínica',
     viewTitle: 'Clínicas',
+    detailsTitle: 'Detalle',
+    basicInfo: 'Información Básica', 
+    addressInfo: 'Información de la dirección',
     id: 'ID',
     name: 'Nombre',
     addressLine1: 'Dirección Línea 1',
@@ -23,6 +26,7 @@ export const es = {
     phone: 'Número de Teléfono',
     email: 'Correo Electrónico',
     submit: 'Crear nueva Clínica',
+    addOwner: "Añadir propietario",
     validation: {
       nameRequired: 'El nombre de la clínica es requerido',
       addressRequired: 'La dirección es requerida',
@@ -34,12 +38,17 @@ export const es = {
     },
     messages:{
       createSuccess: 'Clínica creada exitosamente',
+    },
+    error:{
+      notFound: "Clínica no encontrada",
     }
   },
   common:{
     search: "Búsqueda",
+    edit: "Editar",
     rowPerPage: "Filas por página",
     of: "de",
+    loading: "Cargando",
 
   },
   

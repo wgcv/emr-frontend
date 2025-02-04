@@ -13,6 +13,9 @@ export const en = {
   clinic: {
     title: 'Create New Clinic',
     viewTitle: 'Clinics',
+    detailsTitle: 'Detials',
+    basicInfo: 'Basic Information',
+    addressInfo: 'Address Information',
     id: 'ID',
     name: 'Name',
     addressLine1: 'Address Line 1',
@@ -23,6 +26,7 @@ export const en = {
     phone: 'Phone Number',
     email: 'Email',
     submit: 'Create a new Clinic',
+    addOwner: "Add Owner",
     validation: {
       nameRequired: 'Clinic name is required',
       addressRequired: 'Address is required',
@@ -34,12 +38,17 @@ export const en = {
     },
     messages:{
       createSuccess: 'Clinic created successfully',
+    },
+    error:{
+      notFound: "Error not found results"
     }
   },
   common:{
     search: "Search",
+    edit: "Edit",
     rowPerPage: "Rows per page",
     of: "of",
+    loading: "Loading",
   },
   settings:{
     language: "Select language",
