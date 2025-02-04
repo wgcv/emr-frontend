@@ -28,8 +28,8 @@ function AppBar() {
         {
             name: t("menu.clinics"),
             url: [
-                { name: "View", url: "/staff/clinic/view" },
-                { name: "Divider", url: "/staff/clinic/create" },
+                { name: "View", url: "/staff/clinics/view" },
+                { name: "Divider", url: null },
                 { name: t("menu.createClinics"), url: "/staff/clinic/create" },
                 { name: t("menu.createClinicOwner"), url: "/staff/clinic/create-owner" }
             ],
@@ -132,7 +132,7 @@ function AppBar() {
                                     ) : (
                                         <MenuItem
                                             key={subItem.name}
-                                            onClick={() => handleNavigation(subItem.url)}
+                                                onClick={() => subItem.url && handleNavigation(subItem.url)}
                                             sx={{ pl: 3 }}
                                         >
                                             <Typography textAlign="center">{subItem.name}</Typography>
@@ -181,7 +181,9 @@ function AppBar() {
                                         key={subItem.name}
                                         onClick={() => {
                                             handleCloseDesktopSubMenu(item.name);
-                                            handleNavigation(subItem.url);
+                                            if (subItem.url) {
+                                                handleNavigation(subItem.url);
+                                            }
                                         }}
                                     >
                                         <Typography textAlign="center">{subItem.name}</Typography>
