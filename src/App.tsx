@@ -6,6 +6,7 @@ import { NotFound } from './components/common/NotFound';
 import { ProtectedRoute, ProtectedStaffRoute, ProtectedVeterinaryRoute } from './components/common/ProtectedRoute';
 import CreateClinic from './components/staff/clinic/CreateClinic';
 import CreateClinicOwner from './components/staff/clinic/CreateClinicOwner';
+import ViewClinic from './components/staff/clinic/ViewClinic';
 import ViewClinics from './components/staff/clinic/ViewClinics';
 import Settings from './components/staff/Settings';
 import StaffLayout from './components/staff/StaffLayout';
@@ -25,7 +26,8 @@ function App() {
             <Route element={<StaffLayout />}>
               <Route path="/staff/dashboard" element={<div>Dashboard Staff</div>} />
               <Route path="/staff/settings" element={<Settings />} />
-              <Route path="/staff/clinic/view" element={<ViewClinics />} />
+              <Route path="/staff/clinics/view" element={<ViewClinics />} />
+              <Route path="/staff/clinics/:clinicId" element={<ViewClinic />} />
               <Route path="/staff/clinic/create" element={<CreateClinic />} />
               <Route path="/staff/clinic/create-owner" element={<CreateClinicOwner />} />
 
