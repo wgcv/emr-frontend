@@ -3,8 +3,13 @@ import { Clinic, GetClinicResponse } from "../types/Clinic.types";
 
 
 export const createClinic = async (clinic: Clinic): Promise<Clinic> => {
-  const { data } = await axiosClient.post<Clinic>('/clinics', clinic)
+  const { data } = await axiosClient.post<Clinic>('/staff/clinics', clinic)
   return data
+};
+
+export const getClinic = async (id: string): Promise<{ clinic: Clinic }> => {
+  const { data } = await axiosClient.get<{ clinic: Clinic }>(`/staff/clinics/${id}`);
+  return data;
 };
 
 export const getClinics = async (page: number, rowsPerPage: number, search?: string): Promise<GetClinicResponse> => {
@@ -13,7 +18,7 @@ export const getClinics = async (page: number, rowsPerPage: number, search?: str
     limit: rowsPerPage,
     ...(search && { search })
   };
-  
-  const { data } = await axiosClient.get<GetClinicResponse>('/clinics', { params });
+
+  const { data } = await axiosClient.get<GetClinicResponse>('/staff/clinics', { params });
   return data;
 };
