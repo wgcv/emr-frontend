@@ -35,10 +35,19 @@ const getDesignTokens = (mode: PaletteMode) => ({
             paper: '#1e1e1e',
           },
           text: {
-            primary: '#fff',
+            primary: grey[50],
             secondary: grey[500],
           },
         }),
+  },
+  typography: {
+    subtitle1: {
+      fontSize: '1rem',
+      fontWeight: 500,
+      lineHeight: 1.5,
+      letterSpacing: '0.00938em',
+      color: mode === 'light' ? grey[800] : grey[400],
+    },
   },
 })
 
