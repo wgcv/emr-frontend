@@ -16,7 +16,7 @@ export const login = async (credentials: LoginCredentials): Promise<AuthResponse
     sameSite: 'strict',
     expires: 30 // 30 days
   })
-  Cookies.set('role', data.user.role, { 
+  Cookies.set('actor', data.user.actor, { 
     secure: true,
     sameSite: 'strict',
     expires: 30 // 30 days
@@ -27,7 +27,7 @@ export const login = async (credentials: LoginCredentials): Promise<AuthResponse
 export const logout = () => {
   Cookies.remove('accessToken')
   Cookies.remove('refreshToken')
-  Cookies.remove('role')
+  Cookies.remove('actor')
 
 }
 
@@ -36,6 +36,6 @@ export const getToken = (): string | undefined => {
 }
 
 
-export const getRole = (): string | undefined => {
-  return Cookies.get('role')
+export const getActor = (): string | undefined => {
+  return Cookies.get('actor')
 }

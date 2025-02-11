@@ -124,8 +124,8 @@ const ViewClinics: React.FC = () => {
                     <TableBody>
                         {data?.clinics.map((clinic) => (
                             <TableRow
-                                key={clinic._id}
-                                onClick={() => clinic._id && handleRowClick(clinic._id)}
+                                key={clinic.id}
+                                onClick={() => clinic.id && handleRowClick(clinic.id)}
                                 sx={{
                                     cursor: 'pointer',
                                     '&:hover': {
@@ -134,7 +134,7 @@ const ViewClinics: React.FC = () => {
                                     transition: 'background-color 0.2s ease'
                                 }}
                             >
-                                {/* <TableCell sx={{ ...commonCellStyle, display: { xs: 'none', sm: 'table-cell' }, maxWidth: 100 }}>{clinic._id}</TableCell> */}
+                                {/* <TableCell sx={{ ...commonCellStyle, display: { xs: 'none', sm: 'table-cell' }, maxWidth: 100 }}>{clinic.id}</TableCell> */}
                                 <TableCell sx={{ ...commonCellStyle, maxWidth: 200 }}>{clinic.name}</TableCell>
                                 <TableCell sx={{ ...commonCellStyle, maxWidth: 150 }}>{clinic.city}</TableCell>
                                 <TableCell sx={{ ...commonCellStyle, maxWidth: 150 }}>

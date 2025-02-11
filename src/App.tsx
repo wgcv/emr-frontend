@@ -29,7 +29,7 @@ function App() {
               <Route path="/staff/clinics/view" element={<ViewClinics />} />
               <Route path="/staff/clinics/:clinicId" element={<ViewClinic />} />
               <Route path="/staff/clinic/create" element={<CreateClinic />} />
-              <Route path="/staff/clinic/create-owner" element={<CreateClinicOwner />} />
+              <Route path="/staff/clinic/:clinicId/create-owner" element={<CreateClinicOwner />} />
 
             </Route>
           </Route>

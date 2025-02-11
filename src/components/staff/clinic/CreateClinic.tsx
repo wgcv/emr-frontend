@@ -49,9 +49,9 @@ const CreateClinic: React.FC = () => {
 
   const clinicMutation = useMutation({
     mutationFn: createClinic,
-    // onSuccess: (data) => {
-    onSuccess: () => {
-      navigate('/staff/dashboard', {
+    onSuccess: (data) => {
+      console.log("data", data);
+      navigate('/staff/clinics/' + data.id, {
         state: {
           snackbar: {
             message: t('clinic.messages.createSuccess'),

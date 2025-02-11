@@ -11,8 +11,15 @@ import {
 import { useMutation } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { CLINIC_ROLES, PET_OWNER_ROLES, STAFF_ROLE } from '../types/User'
-import { getRole, getToken, login } from './api/auth.types'
+import { ACTORS } from '../types/User'
+import { getActor, getToken, login } from './api/auth.types'
+
+const StyledPaper = styled(Paper)(({ theme }) => ({
+    padding: theme.spacing(3),
+    maxWidth: 600,
+    margin: '0 auto',
+}));
+
 export const LoginForm = () => {
     const navigate = useNavigate()
     const [credentials, setCredentials] = useState({
@@ -21,13 +28,13 @@ export const LoginForm = () => {
     })
     useEffect(() => {
         if (getToken()) {
-            const role = getRole()
-            if (role) {
-                if (STAFF_ROLE.includes(role)) {
+            const actor = getActor()
+            if (actor) {
+                if (actor === 'staff') {
                     navigate('/staff/dashboard')
-                } else if (CLINIC_ROLES.includes(role)) {
+                } else if (actor === 'veterinary') {
                     navigate('/veterinary/dashboard')
-                } else if (PET_OWNER_ROLES.includes(role)) {
+                } else if (actor === 'petOwner') {
                     navigate('/pet-owner/dashboard')
                 }
             }
@@ -36,12 +43,12 @@ export const LoginForm = () => {
     const loginMutation = useMutation({
         mutationFn: login,
         onSuccess: (data) => {
-            const role = data.user.role;
-            if (STAFF_ROLE.includes(role)) {
+            const actor = data.user.actor;
+            if (actor === 'staff') {
                 navigate('/staff/dashboard')
-            } else if (CLINIC_ROLES.includes(role)) {
+            } else if (actor === 'veterinary') {
                 navigate('/veterinary/dashboard')
-            } else if (PET_OWNER_ROLES.includes(role)) {
+            } else if (actor === 'petOwner') {
                 navigate('/pet-owner/dashboard')
             }
         }
@@ -52,11 +59,7 @@ export const LoginForm = () => {
         loginMutation.mutate(credentials)
     }
 
-    const StyledPaper = styled(Paper)(({ theme }) => ({
-        padding: theme.spacing(3),
-        maxWidth: 600,
-        margin: '0 auto',
-    }));
+    // Remove StyledPaper definition from here
     return (
         <Container component="main" maxWidth="xs">
             <Box
@@ -90,9 +93,8 @@ export const LoginForm = () => {
                             label="Email Address"
                             name="email"
                             autoComplete="email"
-                            autoFocus
                             value={credentials.email}
-                            onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
+                            onChange={(e) => setCredentials((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
                             error={loginMutation.isError}
                         />
                         <TextField
@@ -105,7 +107,7 @@ export const LoginForm = () => {
                             id="password"
                             autoComplete="current-password"
                             value={credentials.password}
-                            onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
+                            onChange={(e) => setCredentials((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
                             error={loginMutation.isError}
                         />
                         {loginMutation.isError && (

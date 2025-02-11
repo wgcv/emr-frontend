@@ -1,5 +1,5 @@
 export interface Clinic {
-    _id?: string;
+    id?: string;
     name: string;
     addressLine1: string;
     addressLine2: string;

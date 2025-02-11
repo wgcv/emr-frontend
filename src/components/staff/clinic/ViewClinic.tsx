@@ -92,7 +92,7 @@ const ViewClinic: React.FC = () => {
                 <Typography variant="h5" sx={{ mb: 2 }}>
                     {t("clinic.basicInfo")}
                 </Typography>
-                <InfoRow label={t('clinic.id')} value={clinic.clinic._id ? clinic.clinic._id : ''} />
+                <InfoRow label={t('clinic.id')} value={clinic.clinic.id ? clinic.clinic.id : ''} />
                 <InfoRow label={t('clinic.name')} value={clinic.clinic.name} />
                 <InfoRow label={t('clinic.email')} value={clinic.clinic.email} />
                 <InfoRow label={t('clinic.phone')} value={formatPhone(clinic.clinic.phone)} />
@@ -103,9 +103,9 @@ const ViewClinic: React.FC = () => {
                 {clinic.clinic.addressLine2 && (
                     <InfoRow label={t('clinic.addressLine2')} value={clinic.clinic.addressLine2} />
                 )}
+                <InfoRow label={t('clinic.zipcode')} value={clinic.clinic.zipcode} />
                 <InfoRow label={t('clinic.city')} value={clinic.clinic.city} />
                 <InfoRow label={t('clinic.country')} value={clinic.clinic.country} />
-                <InfoRow label={t('clinic.zipcode')} value={clinic.clinic.zipcode} />
 
             </StyledPaper>
         </Container>

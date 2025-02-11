@@ -14,7 +14,7 @@ export const useTheme = () => useContext(ThemeContext)
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [mode, setMode] = useState<'light' | 'dark'>(() => {
     // Initialize theme from localStorage or fallback to 'light'
-    return (localStorage.getItem('theme') as 'light' | 'dark') || 'light'
+    return (localStorage.getItem('theme') === 'dark' ? 'dark' : 'light') as 'light' | 'dark';
   })
 
   const colorMode = useMemo(

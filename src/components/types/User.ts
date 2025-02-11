@@ -1,9 +1,10 @@
 export interface User {
-      _id: string;
+      id: string;
       name: string;
       lastName: string;
       email: string;
-      role: string;
+      actor: string;
+      roles: string[];
       isActive: boolean;
       permissions: string[];
       createdAt: string;
