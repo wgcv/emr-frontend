@@ -1,12 +1,10 @@
-import { getActor, getToken } from '@/components/api/auth';
+import { getActor, getRefreshToken } from '@/components/api/auth';
 import { Navigate, Outlet } from 'react-router-dom';
 export const ProtectedRoute = () => {
-    const token = getToken()
-
-    if (!token) {
+    const refreshToken = getRefreshToken()
+    if (!refreshToken) {
         return <Navigate to="/login" replace />
     }
-
     return <Outlet />
 };
 

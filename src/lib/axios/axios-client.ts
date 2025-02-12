@@ -1,19 +1,17 @@
 import { getRefreshToken, getToken, setRefreshToken, setToken } from '@/components/api/auth'
 import axios, { type AxiosError, type AxiosInstance, type InternalAxiosRequestConfig } from "axios"
+import AuthStateManager from "./auth-state"
 
-// Strong typing for the refresh token response
 interface RefreshTokenResponse {
   accessToken: string
   refreshToken: string
 }
 
-// Type for queued requests
 interface QueueItem {
   resolve: (token: string) => void
   reject: (error: unknown) => void
 }
 
-// Extend AxiosRequestConfig to include retry flag
 interface RetryableRequest extends InternalAxiosRequestConfig {
   _retry?: boolean
 }
@@ -32,6 +30,14 @@ class AxiosClient {
       }
     })
     AxiosClient.failedQueue = []
+  }
+
+  private static handleAuthError(): void {
+    // Clear tokens
+    setToken("")
+    setRefreshToken("")
+    // Notify listeners about authentication error
+    AuthStateManager.notifyAuthError()
   }
 
   public static getInstance(): AxiosInstance {
@@ -67,8 +73,7 @@ class AxiosClient {
           }
 
           // Handle unauthorized errors except for auth endpoints
-          // && !originalRequest.url?.includes("/auth/")
-          if (error.response?.status === 401 && !originalRequest._retry) {
+          if (error.response?.status === 401 && !originalRequest._retry && !originalRequest.url?.includes("/auth/")) {
             originalRequest._retry = true
 
             if (AxiosClient.isRefreshing) {
@@ -79,6 +84,7 @@ class AxiosClient {
                 originalRequest.headers.Authorization = `Bearer ${token}`
                 return AxiosClient.instance(originalRequest)
               } catch (err) {
+                AxiosClient.handleAuthError()
                 return Promise.reject(err)
               }
             }
@@ -92,6 +98,7 @@ class AxiosClient {
               }
 
               const { data } = await AxiosClient.instance.post<RefreshTokenResponse>("/auth/refresh", { refreshToken })
+
               const { accessToken, refreshToken: newRefreshToken } = data
 
               setToken(accessToken)
@@ -103,9 +110,7 @@ class AxiosClient {
               return AxiosClient.instance(originalRequest)
             } catch (refreshError) {
               AxiosClient.processQueue(refreshError)
-              // Clear tokens on refresh failure
-              setToken("")
-              setRefreshToken("")
+              AxiosClient.handleAuthError()
               throw refreshError
             } finally {
               AxiosClient.isRefreshing = false
