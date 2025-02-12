@@ -41,14 +41,23 @@ export const en = {
     },
     error:{
       notFound: "Error not found results"
+    },
+    clinicOwner:{
+      createTitle: "Create Clinic Owner",
     }
   },
   common:{
     search: "Search",
     edit: "Edit",
+    create: "Create",
     rowPerPage: "Rows per page",
     of: "of",
     loading: "Loading",
+    name: "Name",
+    lastName: "Last Name",
+    email: "Email",
+    notFound: "Error not found results"
+
   },
   settings:{
     language: "Select language",

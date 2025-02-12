@@ -14,6 +14,8 @@ import {
   Typography,
 } from '@mui/material';
 
+import { createClinic } from '@/components/api/clinic';
+import { Clinic } from '@/components/types/Clinic.types';
 import { useMutation } from '@tanstack/react-query';
 import { useFormik } from 'formik';
 import React from 'react';
@@ -21,8 +23,6 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { countries } from '../../../constants/countries';
-import { createClinic } from './api/clinic';
-import { Clinic } from './types/Clinic.types';
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(3),
@@ -50,7 +50,6 @@ const CreateClinic: React.FC = () => {
   const clinicMutation = useMutation({
     mutationFn: createClinic,
     onSuccess: (data) => {
-      console.log("data", data);
       navigate('/staff/clinics/' + data.id, {
         state: {
           snackbar: {
@@ -115,6 +114,7 @@ const CreateClinic: React.FC = () => {
               onChange={formik.handleChange}
               error={formik.touched.name && Boolean(formik.errors.name)}
               helperText={formik.touched.name && formik.errors.name}
+              autoComplete="organization"
             />
 
             <TextField
@@ -128,6 +128,7 @@ const CreateClinic: React.FC = () => {
               onChange={formik.handleChange}
               error={formik.touched.addressLine1 && Boolean(formik.errors.addressLine1)}
               helperText={formik.touched.addressLine1 && formik.errors.addressLine1}
+              autoComplete="address-line1"
             />
 
             <TextField
@@ -140,6 +141,7 @@ const CreateClinic: React.FC = () => {
               onChange={formik.handleChange}
               error={formik.touched.addressLine2 && Boolean(formik.errors.addressLine2)}
               helperText={formik.touched.addressLine2 && formik.errors.addressLine2}
+              autoComplete="address-line2"
             />
 
             <Box sx={{ display: 'flex', gap: 2 }}>
@@ -167,6 +169,7 @@ const CreateClinic: React.FC = () => {
                   onChange={formik.handleChange}
                   error={formik.touched.country && Boolean(formik.errors.country)}
                   sx={{ textAlign: 'left' }}
+                  autoComplete="country"
                 >
                   {countries.map((country) => (
                     <MenuItem key={country} value={country}>{country}</MenuItem>
@@ -189,6 +192,7 @@ const CreateClinic: React.FC = () => {
                 onChange={formik.handleChange}
                 error={formik.touched.zipcode && Boolean(formik.errors.zipcode)}
                 helperText={formik.touched.zipcode && formik.errors.zipcode}
+                autoComplete="postal-code"
               />
 
               <TextField
@@ -206,6 +210,7 @@ const CreateClinic: React.FC = () => {
                 error={formik.touched.phone && Boolean(formik.errors.phone)}
                 helperText={formik.touched.phone && formik.errors.phone}
                 inputMode="numeric"
+                autoComplete="tel"
               />
             </Box>
 
@@ -221,6 +226,7 @@ const CreateClinic: React.FC = () => {
               onChange={formik.handleChange}
               error={formik.touched.email && Boolean(formik.errors.email)}
               helperText={formik.touched.email && formik.errors.email}
+              autoComplete="email"
             />
 
             {clinicMutation.isError && (

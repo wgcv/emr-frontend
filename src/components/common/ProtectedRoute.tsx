@@ -1,5 +1,5 @@
+import { getActor, getToken } from '@/components/api/auth';
 import { Navigate, Outlet } from 'react-router-dom';
-import { getActor, getToken } from '../auth/api/auth.types.ts';
 export const ProtectedRoute = () => {
     const token = getToken()
 

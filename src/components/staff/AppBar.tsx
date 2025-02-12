@@ -27,8 +27,12 @@ function AppBar() {
         },
         {
             name: t("menu.clinics"),
+            url: "/staff/clinics",
+        },
+        {
+            name: "Example", //t("menu.clinics"),
             url: [
-                { name: "View", url: "/staff/clinics/view" },
+                { name: "View", url: "/staff/clinics" },
                 { name: "Divider", url: null },
                 { name: t("menu.createClinics"), url: "/staff/clinic/create" },
                 { name: t("menu.createClinicOwner"), url: "/staff/clinic/create-owner" }

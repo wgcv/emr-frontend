@@ -3,26 +3,20 @@ import {
     Box,
     Button,
     Container,
-    FormControl,
-    FormHelperText,
-    InputLabel,
-    MenuItem,
     Paper,
-    Select,
     styled,
     TextField,
     Typography,
 } from '@mui/material';
 
+import { createClinicOwner } from '@/components/api/clinic';
+import { ClinicUser } from '@/components/types/User.types';
 import { useMutation } from '@tanstack/react-query';
 import { useFormik } from 'formik';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
-import { countries } from '../../../constants/countries';
-import { createClinic } from './api/clinic';
-import { Clinic } from './types/Clinic.types';
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(3),
@@ -31,26 +25,22 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 }));
 
 const CreateClinicOwner: React.FC = () => {
-    const { clinicId } = useParams<{ clinicId: string }>();
 
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const { id } = useParams<{ id: string }>();
 
     const validationSchema = Yup.object({
         name: Yup.string().required(t('clinic.validation.nameRequired')),
-        addressLine1: Yup.string().required(t('clinic.validation.addressRequired')),
-        addressLine2: Yup.string(),
-        city: Yup.string().required(t('clinic.validation.cityRequired')),
-        country: Yup.string().required(t('clinic.validation.countryRequired')),
-        zipcode: Yup.string(),
-        phone: Yup.string().required(t('clinic.validation.phoneRequired')),
+        lastName: Yup.string().required(t('clinic.validation.lastNameRequired')),
         email: Yup.string()
             .email(t('clinic.validation.emailInvalid'))
             .required(t('clinic.validation.emailRequired')),
     });
 
-    const clinicMutation = useMutation({
-        mutationFn: createClinic,
+
+    const clinicOwnerMutation = useMutation({
+        mutationFn: createClinicOwner,
         // onSuccess: (data) => {
         onSuccess: () => {
             navigate('/staff/dashboard', {
@@ -65,20 +55,16 @@ const CreateClinicOwner: React.FC = () => {
     })
 
 
-    const formik = useFormik<Clinic>({
+    const formik = useFormik<ClinicUser>({
         initialValues: {
             name: '',
-            addressLine1: '',
-            addressLine2: '',
-            city: '',
-            country: '',
-            zipcode: '',
-            phone: '',
+            lastName: '',
             email: '',
+            clinic: id || '',
         },
         validationSchema,
         onSubmit: (values) => {
-            clinicMutation.mutate(values)
+            clinicOwnerMutation.mutate(values)
         },
     });
 
@@ -102,112 +88,37 @@ const CreateClinicOwner: React.FC = () => {
                     }}
                 >
                     <Typography component="h1" variant="h5" sx={{ mb: 3 }}>
-                        {t('clinic.title')}
+                        {t('clinic.clinicOwner.createTitle')}
                     </Typography>
 
                     <Box component="form" onSubmit={formik.handleSubmit} sx={{ width: '100%' }} noValidate>
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="name"
-                            name="name"
-                            label={t('clinic.name')}
-                            value={formik.values.name}
-                            onChange={formik.handleChange}
-                            error={formik.touched.name && Boolean(formik.errors.name)}
-                            helperText={formik.touched.name && formik.errors.name}
-                        />
-
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="addressLine1"
-                            name="addressLine1"
-                            label={t('clinic.addressLine1')}
-                            value={formik.values.addressLine1}
-                            onChange={formik.handleChange}
-                            error={formik.touched.addressLine1 && Boolean(formik.errors.addressLine1)}
-                            helperText={formik.touched.addressLine1 && formik.errors.addressLine1}
-                        />
-
-                        <TextField
-                            margin="normal"
-                            fullWidth
-                            id="addressLine2"
-                            name="addressLine2"
-                            label={t('clinic.addressLine2')}
-                            value={formik.values.addressLine2}
-                            onChange={formik.handleChange}
-                            error={formik.touched.addressLine2 && Boolean(formik.errors.addressLine2)}
-                            helperText={formik.touched.addressLine2 && formik.errors.addressLine2}
-                        />
-
                         <Box sx={{ display: 'flex', gap: 2 }}>
                             <TextField
                                 margin="normal"
                                 required
                                 fullWidth
-                                id="city"
-                                name="city"
-                                label={t('clinic.city')}
-                                value={formik.values.city}
+                                id="name"
+                                name="name"
+                                label={t('common.name')}
+                                value={formik.values.name}
                                 onChange={formik.handleChange}
-                                error={formik.touched.city && Boolean(formik.errors.city)}
-                                helperText={formik.touched.city && formik.errors.city}
-                            />
-
-                            <FormControl fullWidth margin="normal">
-                                <InputLabel id="country-select-label">{t('clinic.country')}</InputLabel>
-                                <Select
-                                    labelId="country-select-label"
-                                    id="country"
-                                    name="country"
-                                    value={formik.values.country}
-                                    label={t('clinic.country')}
-                                    onChange={formik.handleChange}
-                                    error={formik.touched.country && Boolean(formik.errors.country)}
-                                    sx={{ textAlign: 'left' }}
-                                >
-                                    {countries.map((country) => (
-                                        <MenuItem key={country} value={country}>{country}</MenuItem>
-                                    ))}
-                                </Select>
-                                <FormHelperText error={formik.touched.country && Boolean(formik.errors.country)}>
-                                    {formik.touched.country && formik.errors.country}
-                                </FormHelperText>
-                            </FormControl>
-                        </Box>
-
-                        <Box sx={{ display: 'flex', gap: 2 }}>
-                            <TextField
-                                margin="normal"
-                                fullWidth
-                                id="zipcode"
-                                name="zipcode"
-                                label={t('clinic.zipcode')}
-                                value={formik.values.zipcode}
-                                onChange={formik.handleChange}
-                                error={formik.touched.zipcode && Boolean(formik.errors.zipcode)}
-                                helperText={formik.touched.zipcode && formik.errors.zipcode}
+                                error={formik.touched.name && Boolean(formik.errors.name)}
+                                helperText={formik.touched.name && formik.errors.name}
+                                autoComplete="given-name"
                             />
 
                             <TextField
                                 margin="normal"
                                 required
                                 fullWidth
-                                id="phone"
-                                name="phone"
-                                label={t('clinic.phone')}
-                                value={formik.values.phone.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2 - $3')}
-                                onChange={(e) => {
-                                    const rawValue = e.target.value.replace(/[^\d]/g, '');
-                                    formik.setFieldValue('phone', rawValue);
-                                }}
-                                error={formik.touched.phone && Boolean(formik.errors.phone)}
-                                helperText={formik.touched.phone && formik.errors.phone}
-                                inputMode="numeric"
+                                id="lastName"
+                                name="lastName"
+                                label={t('common.lastName')}
+                                value={formik.values.lastName}
+                                onChange={formik.handleChange}
+                                error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+                                helperText={formik.touched.lastName && formik.errors.lastName}
+                                autoComplete="family-name"
                             />
                         </Box>
 
@@ -218,18 +129,20 @@ const CreateClinicOwner: React.FC = () => {
                             id="email"
                             name="email"
                             type="email"
-                            label={t('clinic.email')}
+                            label={t('common.email')}
                             value={formik.values.email}
                             onChange={formik.handleChange}
                             error={formik.touched.email && Boolean(formik.errors.email)}
                             helperText={formik.touched.email && formik.errors.email}
+                            autoComplete="email"
                         />
 
-                        {clinicMutation.isError && (
+
+                        {clinicOwnerMutation.isError && (
                             <Alert severity="error" sx={{ mt: 2 }}>
-                                {clinicMutation.error instanceof Error
-                                    ? clinicMutation.error.message
-                                    : 'Invalid credentials.'}
+                                {clinicOwnerMutation.error instanceof Error
+                                    ? clinicOwnerMutation.error.message
+                                    : 'Error creating Clinic owner.'}
                             </Alert>
                         )}
                         <Button
@@ -239,7 +152,7 @@ const CreateClinicOwner: React.FC = () => {
                             sx={{ mt: 3, mb: 2 }}
                             size="large"
                         >
-                            {t('clinic.submit')}
+                            {t('common.create')}
                         </Button>
 
                     </Box>

@@ -41,14 +41,22 @@ export const es = {
     },
     error:{
       notFound: "Clínica no encontrada",
+    },
+    clinicOwner:{
+      createTitle: "Crear Propietario de la clínica",
     }
   },
   common:{
     search: "Búsqueda",
+    create: "Crear",
     edit: "Editar",
     rowPerPage: "Filas por página",
     of: "de",
     loading: "Cargando",
+    name: "Nombre",
+    lastName: "Apellido",
+    email: "Correo electrónico",
+    notFound: "Error, no se puede encontrar resultados"
 
   },
   

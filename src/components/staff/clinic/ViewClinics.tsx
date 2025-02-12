@@ -1,6 +1,9 @@
+import { getClinics } from '@/components/api/clinic';
+import { Add as AddIcon } from "@mui/icons-material";
 import SearchIcon from '@mui/icons-material/Search';
 import {
     Box,
+    Button,
     InputAdornment,
     Paper,
     Table,
@@ -11,17 +14,15 @@ import {
     TablePagination,
     TableRow,
     TextField,
-    Typography,
+    Typography
 } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useDebounce } from '../../../hooks/useDebounce';
-import { getClinics } from './api/clinic';
-import { GetClinicResponse } from './types/Clinic.types';
+import { GetClinicResponse } from '../../types/Clinic.types';
 
-// Add this constant at the top of the file, after the imports
 const commonCellStyle = {
     whiteSpace: 'nowrap',
     overflow: 'hidden',
@@ -78,22 +79,36 @@ const ViewClinics: React.FC = () => {
                 </Typography>
             </Box>
 
-            <Box sx={{ mb: 2 }}>
+            <Box sx={{ mb: 2, display: 'flex', gap: 2 }}>
                 <TextField
                     fullWidth
                     variant="outlined"
                     label={t('common.search')}
-
                     value={searchQuery}
                     onChange={handleSearchChange}
-                    InputProps={{
-                        startAdornment: (
+                    slotProps={{
+                        input: {
+                            startAdornment: (
                             <InputAdornment position="start">
-                                <SearchIcon />
+                                    <SearchIcon />
                             </InputAdornment>
-                        ),
+                            ),
+                        },
                     }}
                 />
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => navigate('/staff/clinics/create')}
+
+                    sx={{
+                        fontWeight: 500,
+                    }}
+                    startIcon={<AddIcon />}
+                >
+                    {t('common.create')}
+                </Button>
+
             </Box>
 
             <TableContainer

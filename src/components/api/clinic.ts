@@ -1,3 +1,4 @@
+import { ClinicUser } from '@/components/types/User.types';
 import { axiosClient } from '@lib/axios/axios-client';
 import { Clinic, GetClinicResponse } from "../types/Clinic.types";
 
@@ -6,8 +7,13 @@ export const createClinic = async (clinic: Clinic): Promise<Clinic> => {
   return data.clinic
 };
 
-export const getClinic = async (id: string): Promise<{ clinic: Clinic }> => {
-  const { data } = await axiosClient.get<{ clinic: Clinic }>(`/clinics/${id}`);
+export const updateClinic = async (id: string,clinic: Clinic): Promise<Clinic> => {
+  const { data } = await axiosClient.put<{ clinic: Clinic; message: string }>(`/clinics/${id}`, clinic)
+  return data.clinic
+};
+
+export const getClinic = async (id: string): Promise<Clinic> => {
+  const { data } = await axiosClient.get<Clinic>(`/clinics/${id}`);
   return data;
 };
 
@@ -20,4 +26,10 @@ export const getClinics = async (page: number, rowsPerPage: number, search?: str
 
   const { data } = await axiosClient.get<GetClinicResponse>('/clinics', { params });
   return data;
+};
+
+
+export const createClinicOwner = async (user: ClinicUser): Promise<ClinicUser> => {
+  const { data } = await axiosClient.post<{ user: ClinicUser; message: string }>(`/clinics/owners`, user)
+  return data.user
 };

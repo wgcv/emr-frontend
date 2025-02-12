@@ -6,6 +6,7 @@ import { NotFound } from './components/common/NotFound';
 import { ProtectedRoute, ProtectedStaffRoute, ProtectedVeterinaryRoute } from './components/common/ProtectedRoute';
 import CreateClinic from './components/staff/clinic/CreateClinic';
 import CreateClinicOwner from './components/staff/clinic/CreateClinicOwner';
+import EditClinic from './components/staff/clinic/EditClinic';
 import ViewClinic from './components/staff/clinic/ViewClinic';
 import ViewClinics from './components/staff/clinic/ViewClinics';
 import Settings from './components/staff/Settings';
@@ -26,10 +27,12 @@ function App() {
             <Route element={<StaffLayout />}>
               <Route path="/staff/dashboard" element={<div>Dashboard Staff</div>} />
               <Route path="/staff/settings" element={<Settings />} />
-              <Route path="/staff/clinics/view" element={<ViewClinics />} />
-              <Route path="/staff/clinics/:clinicId" element={<ViewClinic />} />
-              <Route path="/staff/clinic/create" element={<CreateClinic />} />
-              <Route path="/staff/clinic/:clinicId/create-owner" element={<CreateClinicOwner />} />
+              <Route path="/staff/clinics/" element={<ViewClinics />} />
+              <Route path="/staff/clinics/:id" element={<ViewClinic />} />
+              <Route path="/staff/clinics/create" element={<CreateClinic />} />
+              <Route path="/staff/clinics/:id/edit" element={<EditClinic />} />
+
+              <Route path="/staff/clinics/:id/owners/create" element={<CreateClinicOwner />} />
 
             </Route>
           </Route>
