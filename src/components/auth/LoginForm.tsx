@@ -1,3 +1,4 @@
+import { getActor, getToken, login } from '@/components/api/auth'
 import {
     Alert,
     Box,
@@ -11,8 +12,8 @@ import {
 import { useMutation } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ACTORS } from '../types/User'
-import { getActor, getToken, login } from './api/auth.types'
+
+import { ACTORS } from '../types/User.types'
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(3),
