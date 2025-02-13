@@ -25,8 +25,7 @@ export const setToken = (accessToken : string) => {
    Cookies.set('accessToken', accessToken, { 
     secure: true,
     sameSite: 'strict',
-    // expires: (1/24) // 1 hour
-    expires: (10/86400) // 1 second (1 day = 86400 seconds)
+    expires: 12/(24*60) // 12 minutes 20 less than the expiration token (15mins)
 
   })
 }
