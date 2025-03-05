@@ -109,7 +109,7 @@ const CreateClinic: React.FC = () => {
               fullWidth
               id="name"
               name="name"
-              label={t('clinic.name')}
+              label={t('common.name')}
               value={formik.values.name}
               onChange={formik.handleChange}
               error={formik.touched.name && Boolean(formik.errors.name)}
@@ -123,7 +123,7 @@ const CreateClinic: React.FC = () => {
               fullWidth
               id="addressLine1"
               name="addressLine1"
-              label={t('clinic.addressLine1')}
+              label={t('common.addressLine1')}
               value={formik.values.addressLine1}
               onChange={formik.handleChange}
               error={formik.touched.addressLine1 && Boolean(formik.errors.addressLine1)}
@@ -136,7 +136,7 @@ const CreateClinic: React.FC = () => {
               fullWidth
               id="addressLine2"
               name="addressLine2"
-              label={t('clinic.addressLine2')}
+              label={t('common.addressLine2')}
               value={formik.values.addressLine2}
               onChange={formik.handleChange}
               error={formik.touched.addressLine2 && Boolean(formik.errors.addressLine2)}
@@ -151,7 +151,7 @@ const CreateClinic: React.FC = () => {
                 fullWidth
                 id="city"
                 name="city"
-                label={t('clinic.city')}
+                label={t('common.city')}
                 value={formik.values.city}
                 onChange={formik.handleChange}
                 error={formik.touched.city && Boolean(formik.errors.city)}
@@ -165,7 +165,7 @@ const CreateClinic: React.FC = () => {
                   id="country"
                   name="country"
                   value={formik.values.country}
-                  label={t('clinic.country')}
+                  label={t('common.country')}
                   onChange={formik.handleChange}
                   error={formik.touched.country && Boolean(formik.errors.country)}
                   sx={{ textAlign: 'left' }}
@@ -187,7 +187,7 @@ const CreateClinic: React.FC = () => {
                 fullWidth
                 id="zipcode"
                 name="zipcode"
-                label={t('clinic.zipcode')}
+                label={t('common.zipcode')}
                 value={formik.values.zipcode}
                 onChange={formik.handleChange}
                 error={formik.touched.zipcode && Boolean(formik.errors.zipcode)}
@@ -201,7 +201,7 @@ const CreateClinic: React.FC = () => {
                 fullWidth
                 id="phone"
                 name="phone"
-                label={t('clinic.phone')}
+                label={t('common.phone')}
                 value={formik.values.phone.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2 - $3')}
                 onChange={(e) => {
                   const rawValue = e.target.value.replace(/[^\d]/g, '');
@@ -221,7 +221,7 @@ const CreateClinic: React.FC = () => {
               id="email"
               name="email"
               type="email"
-              label={t('clinic.email')}
+              label={t('common.email')}
               value={formik.values.email}
               onChange={formik.handleChange}
               error={formik.touched.email && Boolean(formik.errors.email)}

@@ -1,8 +1,12 @@
+import { Clinic } from "./Clinic.types";
+import { PaginationData } from "./Pagination.types";
+
 export interface User {
       id?: string;
       name: string;
       lastName: string;
       email: string;
+      phone: string;
       actor?: string;
       roles?: string[];
       isActive?: boolean;
@@ -13,23 +17,13 @@ export interface User {
   };
 
 
-export interface ClinicUser {
-    id?: string;
-    name: string;
-    lastName: string;
-    email: string;
-    actor?: string;
-    roles?: string[];
-    isActive?: boolean;
-    clinic: string;
-    createdAt?: string;
-    updatedAt?: string;
-    resetPasswordExpires?: string;
-    resetPasswordToken?: string;
+export interface ClinicUser extends User {
+    clinic: Clinic;
 };
+ 
   
-
-export const STAFF_ROLE = ["staff"];
-export const PET_OWNER_ROLES = ["pet_owner"];
-export const CLINIC_ROLES = ["veterinary", "clinic_owner", "assistant", "technician", "basic_vet"];
-export const ALL_ROLES = [...STAFF_ROLE, ...PET_OWNER_ROLES, ...CLINIC_ROLES];
+export interface GetUserResponse {
+  users: (User | ClinicUser)[];
+  pagination: PaginationData;
+  }
+  

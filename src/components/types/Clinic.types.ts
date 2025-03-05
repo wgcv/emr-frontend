@@ -1,3 +1,5 @@
+import { PaginationData } from "./Pagination.types";
+
 export interface Clinic {
     id?: string;
     name: string;
@@ -10,14 +12,7 @@ export interface Clinic {
     email: string;
   }
 
-  interface PaginationData {
-    currentPage: number;
-    totalPages: number;
-    totalItems: number;
-    itemsPerPage: number;
-    hasNextPage: boolean;
-    hasPrevPage: boolean;
-  }
+
   
   export interface GetClinicResponse {
     clinics: Clinic[];

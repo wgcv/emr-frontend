@@ -2,6 +2,7 @@ export const en = {
   menu:{
     home: 'Home',
     clinics: 'Clinics',
+    users: 'Users',
     createClinics: 'Create clinics',
     createClinicOwner: 'Create Clinic Owner',
   },
@@ -13,18 +14,7 @@ export const en = {
   clinic: {
     title: 'Create New Clinic',
     viewTitle: 'Clinics',
-    detailsTitle: 'Detials',
-    basicInfo: 'Basic Information',
-    addressInfo: 'Address Information',
-    id: 'ID',
-    name: 'Name',
-    addressLine1: 'Address Line 1',
-    addressLine2: 'Address Line 2',
-    city: 'City',
-    country: 'Country',
-    zipcode: 'Zip Code',
-    phone: 'Phone Number',
-    email: 'Email',
+    detailsTitle: 'Clinics Detials',
     submit: 'Create a new Clinic',
     addOwner: "Add Owner",
     validation: {
@@ -40,11 +30,22 @@ export const en = {
       createSuccess: 'Clinic created successfully',
     },
     error:{
-      notFound: "Error not found results"
+      loading: "Error loading Clinics"
     },
     clinicOwner:{
       createTitle: "Create Clinic Owner",
     }
+  },
+  user: {
+    viewTitle: "Users",
+    detailsTitle: "User details",
+    editTitle: "Edit User",
+    addTitle: "Add User",
+    submit: "Create User",
+    basicInfo: "Basic Information",
+    error:{
+      loading: "Error loading Users"
+    },
   },
   common:{
     search: "Search",
@@ -56,7 +57,27 @@ export const en = {
     name: "Name",
     lastName: "Last Name",
     email: "Email",
-    notFound: "Error not found results"
+    phone: "Phone",
+    notFound: "Error not found results",
+    basicInfo: 'Basic Information',
+    addressInfo: 'Address Information',
+    id: 'ID',
+    addressLine1: 'Address Line 1',
+    addressLine2: 'Address Line 2',
+    city: 'City',
+    country: 'Country',
+    zipcode: 'Zip Code',
+    active: 'Active',
+    clinic: 'Clinic',
+
+    validation:{
+      lastNameRequired: "Last Name Required",
+      nameRequired: "Name Required",
+      emailRequired: "Email Required",
+      emailInvalid: "Invalid email address",
+      phoneInvalid: "Invalid phone number",
+      addressRequired: "Address Required",
+    }
 
   },
   settings:{

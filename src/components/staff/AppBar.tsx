@@ -30,6 +30,11 @@ function AppBar() {
             url: "/staff/clinics",
         },
         {
+            name: t("menu.users"),
+            url: "/staff/users",
+        },
+
+        {
             name: "Example", //t("menu.clinics"),
             url: [
                 { name: "View", url: "/staff/clinics" },

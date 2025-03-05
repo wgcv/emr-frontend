@@ -1,4 +1,5 @@
-import { getClinics } from '@/components/api/clinic';
+import { getUsers } from '@/components/api/users';
+import { GetUserResponse } from '@/components/types/User.types';
 import { Add as AddIcon } from "@mui/icons-material";
 import SearchIcon from '@mui/icons-material/Search';
 import {
@@ -21,7 +22,6 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useDebounce } from '../../../hooks/useDebounce';
-import { GetClinicResponse } from '../../types/Clinic.types';
 
 const commonCellStyle = {
     whiteSpace: 'nowrap',
@@ -29,7 +29,7 @@ const commonCellStyle = {
     textOverflow: 'ellipsis'
 };
 
-const ViewClinics: React.FC = () => {
+const ViewUsers: React.FC = () => {
     const navigate = useNavigate();
     const { t } = useTranslation();
     const [page, setPage] = useState(0);
@@ -38,10 +38,10 @@ const ViewClinics: React.FC = () => {
     const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
     // You can use isLoading but we don't use because flicking the table
-    const { data, isError } = useQuery<GetClinicResponse, Error>(
+    const { data, isError } = useQuery<GetUserResponse, Error>(
         {
-            queryKey: ['clinics', page, rowsPerPage, debouncedSearchQuery],
-            queryFn: () => getClinics(page, rowsPerPage, debouncedSearchQuery),
+            queryKey: ['users', page, rowsPerPage, debouncedSearchQuery],
+            queryFn: () => getUsers(page, rowsPerPage, debouncedSearchQuery),
 
         }
     );
@@ -59,11 +59,11 @@ const ViewClinics: React.FC = () => {
 
 
     if (isError) {
-        return <Typography color="error">Error loading clinics</Typography>;
+        return <Typography color="error">t('users.error.loading')</Typography>;
     }
 
-    const handleRowClick = (clinicId: string) => {
-        navigate(`/staff/clinics/${clinicId}`);
+    const handleRowClick = (userId: string) => {
+        navigate(`/staff/users/${userId}`);
     };
 
     // Add debounced search handler
@@ -75,7 +75,7 @@ const ViewClinics: React.FC = () => {
         <Box sx={{ width: '100%' }}>
             <Box sx={{ width: '100%', mb: 2 }}>
                 <Typography variant="h4" component="h1" gutterBottom>
-                    {t('clinic.viewTitle')}
+                    {t('user.viewTitle')}
                 </Typography>
             </Box>
 
@@ -89,9 +89,9 @@ const ViewClinics: React.FC = () => {
                     slotProps={{
                         input: {
                             startAdornment: (
-                            <InputAdornment position="start">
+                                <InputAdornment position="start">
                                     <SearchIcon />
-                            </InputAdornment>
+                                </InputAdornment>
                             ),
                         },
                     }}
@@ -99,7 +99,7 @@ const ViewClinics: React.FC = () => {
                 <Button
                     variant="contained"
                     color="primary"
-                    onClick={() => navigate('/staff/clinics/create')}
+                    onClick={() => navigate('/staff/users/create')}
 
                     sx={{
                         fontWeight: 500,
@@ -126,21 +126,22 @@ const ViewClinics: React.FC = () => {
                     }
                 }}
             >
-                <Table aria-label="clinics table">
+                <Table aria-label="users table">
                     <TableHead>
                         <TableRow>
-                            {/* <TableCell sx={{ ...commonCellStyle, display: { xs: 'none', sm: 'table-cell' }, maxWidth: 100 }}>{t('clinic.id')}</TableCell> */}
                             <TableCell sx={{ ...commonCellStyle, maxWidth: 200, fontWeight: 'bold', fontSize: "1rem" }}>{t('common.name')}</TableCell>
-                            <TableCell sx={{ ...commonCellStyle, maxWidth: 150, fontWeight: 'bold', fontSize: "1rem" }}>{t('common.city')}</TableCell>
+                            <TableCell sx={{ ...commonCellStyle, maxWidth: 150, fontWeight: 'bold', fontSize: "1rem" }}>{t('common.lastName')}</TableCell>
+                            <TableCell sx={{ ...commonCellStyle, maxWidth: 150, fontWeight: 'bold', fontSize: "1rem" }}>{t('common.email')}</TableCell>
                             <TableCell sx={{ ...commonCellStyle, maxWidth: 150, fontWeight: 'bold', fontSize: "1rem" }}>{t('common.phone')}</TableCell>
-                            <TableCell sx={{ ...commonCellStyle, display: { xs: 'none', sm: 'table-cell' }, maxWidth: 200, fontWeight: 'bold', fontSize: "1rem" }}>{t('common.email')}</TableCell>
+                            <TableCell sx={{ ...commonCellStyle, maxWidth: 150, fontWeight: 'bold', fontSize: "1rem" }}>{t('common.clinic')}</TableCell>
+                            <TableCell sx={{ ...commonCellStyle, display: { xs: 'none', sm: 'table-cell' }, maxWidth: 200, textAlign: "center", fontWeight: 'bold', fontSize: "1rem" }}>{t('common.active')}</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data?.clinics.map((clinic) => (
+                        {data?.users.map((user) => (
                             <TableRow
-                                key={clinic.id}
-                                onClick={() => clinic.id && handleRowClick(clinic.id)}
+                                key={user.id}
+                                onClick={() => user.id && handleRowClick(user.id)}
                                 sx={{
                                     cursor: 'pointer',
                                     '&:hover': {
@@ -149,13 +150,19 @@ const ViewClinics: React.FC = () => {
                                     transition: 'background-color 0.2s ease'
                                 }}
                             >
-                                {/* <TableCell sx={{ ...commonCellStyle, display: { xs: 'none', sm: 'table-cell' }, maxWidth: 100 }}>{clinic.id}</TableCell> */}
-                                <TableCell sx={{ ...commonCellStyle, maxWidth: 200 }}>{clinic.name}</TableCell>
-                                <TableCell sx={{ ...commonCellStyle, maxWidth: 150 }}>{clinic.city}</TableCell>
+                                <TableCell sx={{ ...commonCellStyle, maxWidth: 150 }}>{user.name}</TableCell>
+                                <TableCell sx={{ ...commonCellStyle, maxWidth: 150 }}>{user.lastName}</TableCell>
                                 <TableCell sx={{ ...commonCellStyle, maxWidth: 150 }}>
-                                    {clinic.phone.replace(/^(\d{3})(\d{3})(\d{4})$/, '($1) $2-$3')}
+                                    {user.email}
                                 </TableCell>
-                                <TableCell sx={{ ...commonCellStyle, display: { xs: 'none', sm: 'table-cell' }, maxWidth: 200 }}>{clinic.email}</TableCell>
+                                <TableCell sx={{ ...commonCellStyle, maxWidth: 150 }}>
+                                    {user.phone}
+                                </TableCell>
+                                <TableCell sx={{ ...commonCellStyle, maxWidth: 150 }}>
+                                    {'clinic' in user ? user.clinic.name : '-'}
+                                </TableCell>
+
+                                <TableCell sx={{ ...commonCellStyle, display: { xs: 'none', sm: 'table-cell', textAlign: "center" }, maxWidth: 200 }}>{user.isActive ? "✅" : "❌"}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
@@ -178,4 +185,4 @@ const ViewClinics: React.FC = () => {
     );
 };
 
-export default ViewClinics;
+export default ViewUsers;
