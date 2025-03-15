@@ -43,6 +43,7 @@ export const en = {
     addTitle: "Add User",
     submit: "Create User",
     basicInfo: "Basic Information",
+    changeClinic: "Change Clinic",
     error:{
       loading: "Error loading Users"
     },

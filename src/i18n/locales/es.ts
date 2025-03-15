@@ -46,6 +46,7 @@ export const es = {
     addTitle: "Agregar Usuario",
     submit: "Crear Usuario",
     basicInfo: "Información Básica",
+    changeClinic: "Cambiar clínica",
     error:{
       loading: "Error al cargar Usuarios"
     },

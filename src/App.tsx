@@ -12,6 +12,7 @@ import ViewClinic from './components/staff/clinic/ViewClinic';
 import ViewClinics from './components/staff/clinic/ViewClinics';
 import Settings from './components/staff/Settings';
 import StaffLayout from './components/staff/StaffLayout';
+import ChangeClinicUser from './components/staff/users/ChangeClinicUser';
 import EditUser from './components/staff/users/EditUser';
 import ViewUser from './components/staff/users/ViewUser';
 import ViewUsers from './components/staff/users/ViewUsers';
@@ -52,6 +53,8 @@ function App() {
                   <Route path="/staff/users" element={<ViewUsers />} />
                   <Route path="/staff/users/:id" element={<ViewUser />} />
                   <Route path="/staff/users/:id/edit" element={<EditUser />} />
+                  <Route path="/staff/users/:id/change-clinic" element={<ChangeClinicUser />} />
+
 
             </Route>
           </Route>

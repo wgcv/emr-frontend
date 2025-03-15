@@ -27,7 +27,16 @@ export const getClinics = async (page: number, rowsPerPage: number, search?: str
   const { data } = await axiosClient.get<GetClinicResponse>('/clinics', { params });
   return data;
 };
+export const searchClinics = async (page: number, rowsPerPage: number, search?: string): Promise<GetClinicResponse> => {
+  const params = {
+    page: page + 1,
+    limit: rowsPerPage,
+    ...(search && { search })
+  };
 
+  const { data } = await axiosClient.get<GetClinicResponse>('/clinics', { params });
+  return data;
+};
 
 export const createClinicOwner = async (user: ClinicUser): Promise<ClinicUser> => {
   const { data } = await axiosClient.post<{ user: ClinicUser; message: string }>(`/clinics/owners`, user)

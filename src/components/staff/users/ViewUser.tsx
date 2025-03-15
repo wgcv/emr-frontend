@@ -63,6 +63,14 @@ const ViewUser: React.FC = () => {
                     >
                         {t('common.edit')}
                     </Button>
+                    <Button
+                        variant="contained"
+                        startIcon={<EditIcon />}
+                        onClick={() => navigate(`/staff/users/${id}/change-clinic`)}
+                    >
+                        {t('user.changeClinic')}
+                    </Button>
+
                 </Stack>
             </Box>
 

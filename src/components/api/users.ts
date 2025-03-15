@@ -26,3 +26,10 @@ export const updateUser = async (id: string, user: User): Promise<User> => {
   const { data } = await axiosClient.put<{ user: User; message: string }>(`/users/${id}`, user)
   return data.user
 };
+
+
+export const updateClinicUser = async (id: string, user: ClinicUser): Promise<ClinicUser> => {
+  const { data } = await axiosClient.put<{ user: ClinicUser; message: string }>(`/users/change-clinic/${id}`, user)
+  return data.user
+};
+
