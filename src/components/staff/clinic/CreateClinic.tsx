@@ -15,6 +15,7 @@ import {
 } from '@mui/material';
 
 import { createClinic } from '@/components/api/clinic';
+import PhoneInputComponent from '@/components/common/PhoneInputComponent';
 import { Clinic } from '@/components/types/Clinic.types';
 import { useMutation } from '@tanstack/react-query';
 import { useFormik } from 'formik';
@@ -143,8 +144,19 @@ const CreateClinic: React.FC = () => {
               helperText={formik.touched.addressLine2 && formik.errors.addressLine2}
               autoComplete="address-line2"
             />
-
             <Box sx={{ display: 'flex', gap: 2 }}>
+              <TextField
+                margin="normal"
+                fullWidth
+                id="zipcode"
+                name="zipcode"
+                label={t('common.zipcode')}
+                value={formik.values.zipcode}
+                onChange={formik.handleChange}
+                error={formik.touched.zipcode && Boolean(formik.errors.zipcode)}
+                helperText={formik.touched.zipcode && formik.errors.zipcode}
+                autoComplete="postal-code"
+              />
               <TextField
                 margin="normal"
                 required
@@ -158,8 +170,11 @@ const CreateClinic: React.FC = () => {
                 helperText={formik.touched.city && formik.errors.city}
               />
 
+            </Box>
+            <Box sx={{ display: 'flex', gap: 2 }}>
+
               <FormControl fullWidth margin="normal">
-                <InputLabel id="country-select-label">{t('clinic.country')}</InputLabel>
+                <InputLabel id="country-select-label">{t('common.country')}</InputLabel>
                 <Select
                   labelId="country-select-label"
                   id="country"
@@ -181,38 +196,7 @@ const CreateClinic: React.FC = () => {
               </FormControl>
             </Box>
 
-            <Box sx={{ display: 'flex', gap: 2 }}>
-              <TextField
-                margin="normal"
-                fullWidth
-                id="zipcode"
-                name="zipcode"
-                label={t('common.zipcode')}
-                value={formik.values.zipcode}
-                onChange={formik.handleChange}
-                error={formik.touched.zipcode && Boolean(formik.errors.zipcode)}
-                helperText={formik.touched.zipcode && formik.errors.zipcode}
-                autoComplete="postal-code"
-              />
-
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="phone"
-                name="phone"
-                label={t('common.phone')}
-                value={formik.values.phone.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2 - $3')}
-                onChange={(e) => {
-                  const rawValue = e.target.value.replace(/[^\d]/g, '');
-                  formik.setFieldValue('phone', rawValue);
-                }}
-                error={formik.touched.phone && Boolean(formik.errors.phone)}
-                helperText={formik.touched.phone && formik.errors.phone}
-                inputMode="numeric"
-                autoComplete="tel"
-              />
-            </Box>
+            <PhoneInputComponent formik={formik} />
 
             <TextField
               margin="normal"

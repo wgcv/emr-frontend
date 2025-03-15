@@ -46,6 +46,15 @@ export const en = {
     error:{
       loading: "Error loading Users"
     },
+    validation: {
+      nameRequired: 'Name is required',
+      lastNameRequired: 'Last name is required',
+      emailRequired: 'Email is required',
+      phoneRequired: 'Phone is required',
+      emailInvalid: 'Invalid email address'
+
+    },
+
   },
   common:{
     search: "Search",
@@ -68,8 +77,10 @@ export const en = {
     country: 'Country',
     zipcode: 'Zip Code',
     active: 'Active',
-    clinic: 'Clinic',
+    countryCode: 'Country Code',
+    update: 'Update',
 
+    clinic: 'Clinic',
     validation:{
       lastNameRequired: "Last Name Required",
       nameRequired: "Name Required",

@@ -67,7 +67,6 @@ const ViewClinic: React.FC = () => {
             </Box>
 
             <StyledPaper elevation={3}>
-
                 <ClinicInfoDisplayComponent clinic={clinic} showId={true} />
             </StyledPaper>
         </Container>

@@ -3,17 +3,14 @@ import {
     Box,
     Button,
     Container,
-    FormControl,
-    InputLabel,
-    MenuItem,
     Paper,
-    Select,
     styled,
     TextField,
     Typography,
 } from '@mui/material';
 
 import { createClinicOwner } from '@/components/api/clinic';
+import PhoneInputComponent from '@/components/common/PhoneInputComponent';
 import { ClinicUser } from '@/components/types/User.types';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
@@ -34,8 +31,6 @@ const CreateClinicOwner: React.FC = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
-    const [phoneDisplay, setPhoneDisplay] = React.useState('');
-    const [countryCode, setCountryCode] = React.useState('+1');
 
     const validationSchema = Yup.object({
         name: Yup.string().required(t('common.validation.nameRequired')),
@@ -69,13 +64,6 @@ const CreateClinicOwner: React.FC = () => {
 
 
 
-    // Add this handler for phone changes
-    const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newPhone = e.target.value;
-        setPhoneDisplay(newPhone);
-        formik.setFieldValue('phone', `${countryCode}${newPhone.replace(/[\s-]/g, '')}`);
-    };
-
     const formik = useFormik<ClinicUser>({
         initialValues: {
             name: '',
@@ -100,12 +88,7 @@ const CreateClinicOwner: React.FC = () => {
         },
     });
 
-    // Add this effect to update the phone when country code changes
-    React.useEffect(() => {
-        if (phoneDisplay) {
-            formik.setFieldValue('phone', `${countryCode}${phoneDisplay.replace(/[\s-]/g, '')}`);
-        }
-    }, [countryCode]);
+
 
     const getErrorMessage = (error: unknown): string => {
         if (axios.isAxiosError(error) && error.response?.data?.message) {
@@ -173,49 +156,7 @@ const CreateClinicOwner: React.FC = () => {
                             />
                         </Box>
 
-                        <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
-                            <FormControl sx={{
-                                minWidth: 130,
-                                mt: 2,
-                                '& .MuiInputBase-root': {
-                                    height: '56px', // Match TextField height
-                                }
-                            }}>
-                                <InputLabel id="country-code-label">{t('common.countryCode')}</InputLabel>
-                                <Select
-
-                                    labelId="country-code-label"
-                                    value={countryCode}
-                                    label={t('common.countryCode')}
-                                    onChange={(e) => setCountryCode(e.target.value)}
-                                    size="small"
-                                >
-                                    <MenuItem value="+1">+1 (US/CA)</MenuItem>
-
-                                    <MenuItem value="+44">+44 (UK)</MenuItem>
-                                    <MenuItem value="+52">+52 (MX)</MenuItem>
-                                    <MenuItem value="+34">+34 (ES)</MenuItem>
-                                    <MenuItem value="+593">+593 (EC)</MenuItem>
-
-                                    {/* Add more country codes as needed */}
-                                </Select>
-                            </FormControl>
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="phone"
-                                name="phone"
-                                type="tel"
-                                label={t('common.phone')}
-                                value={phoneDisplay}
-                                onChange={handlePhoneChange}
-                                error={formik.touched.phone && Boolean(formik.errors.phone)}
-                                helperText={formik.touched.phone && formik.errors.phone}
-                                autoComplete="tel"
-                                placeholder="123-456-7890"
-                            />
-                        </Box>
+                        <PhoneInputComponent formik={formik} />
 
                         <TextField
                             margin="normal"

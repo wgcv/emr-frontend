@@ -22,3 +22,7 @@ export const getUser = async (id: string): Promise<User | ClinicUser> => {
 
 
 
+export const updateUser = async (id: string, user: User): Promise<User> => {
+  const { data } = await axiosClient.put<{ user: User; message: string }>(`/users/${id}`, user)
+  return data.user
+};

@@ -49,6 +49,14 @@ export const es = {
     error:{
       loading: "Error al cargar Usuarios"
     },
+    validation: {
+      nameRequired: 'Nombre es requerido',
+      lastNameRequired: 'Apellido es requerido',
+      emailRequired: 'Email es requerido',
+      phoneRequired: 'Número de teléfono es requerido',
+      emailInvalid: 'Correo electrónico inválido'
+    },
+
   },
   common:{
     search: "Búsqueda",
@@ -70,6 +78,9 @@ export const es = {
     zipcode: 'Código Postal',
     phone: 'Número de Teléfono',
     active: 'Activo',
+    countryCode: 'Código de País',
+    update: 'Actualizar',
+
     clinic: 'Clínica',
 
     validation:{

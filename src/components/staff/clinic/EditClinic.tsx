@@ -183,7 +183,7 @@ const EditClinic: React.FC = () => {
               />
 
               <FormControl fullWidth margin="normal">
-                <InputLabel id="country-select-label">{t('clinic.country')}</InputLabel>
+                <InputLabel id="country-select-label">{t('common.country')}</InputLabel>
                 <Select
                   labelId="country-select-label"
                   id="country"

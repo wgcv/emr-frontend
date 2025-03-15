@@ -1,7 +1,7 @@
 import { getClinic } from '@/components/api/clinic';
 import { getUser } from '@/components/api/users';
 import InfoRow from '@/components/common/InfoRow';
-import { formatPhone } from '@/components/common/utils/FormatPhone';
+import { formatPhoneAndCode } from '@/components/common/utils/FormatPhone';
 import { ClinicUser, User } from '@/components/types/User.types';
 import EditIcon from '@mui/icons-material/Edit';
 import { Box, Button, Container, Paper, Stack, styled, Typography } from '@mui/material';
@@ -72,8 +72,9 @@ const ViewUser: React.FC = () => {
                 </Typography>
                 <InfoRow label={t('common.id')} value={user.id ? user.id : ''} />
                 <InfoRow label={t('common.name')} value={user.name} />
+                <InfoRow label={t('common.lastName')} value={user.lastName} />
                 <InfoRow label={t('common.email')} value={user.email} />
-                <InfoRow label={t('common.phone')} value={formatPhone(user.phone)} />
+                <InfoRow label={t('common.phone')} value={formatPhoneAndCode(user.phone).countryCode + " " + formatPhoneAndCode(user.phone).phoneNumber} />
             </StyledPaper>
 
             {clinic && (
