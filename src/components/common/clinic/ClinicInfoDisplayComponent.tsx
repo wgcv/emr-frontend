@@ -17,7 +17,7 @@ const ClinicInfoDisplayComponent: React.FC<ClinicInfoDisplayProps> = ({ clinic, 
     return (
         <>
             <Typography variant="h5" sx={{ mb: 2 }}>
-                {t("clinic.basicInfo")}
+                {t("common.basicInfo")}
             </Typography>
             {showId && (
                 <InfoRow label={t('common.id')} value={clinic.id ? clinic.id : ''} />

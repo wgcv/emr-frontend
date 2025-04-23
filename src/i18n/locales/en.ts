@@ -1,10 +1,11 @@
+
 export const en = {
   menu:{
     home: 'Home',
     clinics: 'Clinics',
     users: 'Users',
     createClinics: 'Create clinics',
-    createClinicOwner: 'Create Clinic Owner',
+    inviteClinicOwner: 'Invite Clinic Owner',
   },
   userMenu:{
     profile: 'Profile',
@@ -14,9 +15,10 @@ export const en = {
   clinic: {
     title: 'Create New Clinic',
     viewTitle: 'Clinics',
-    detailsTitle: 'Clinics Detials',
+    detailsTitle: 'Clinics Details',
     submit: 'Create a new Clinic',
     addOwner: "Add Owner",
+    addVeterinary: "Add Veterinary",
     validation: {
       nameRequired: 'Clinic name is required',
       addressRequired: 'Address is required',
@@ -34,7 +36,13 @@ export const en = {
     },
     clinicOwner:{
       createTitle: "Create Clinic Owner",
+      createSuccess: "Owner created successfully",
+
     }
+  },
+  veterinary:{
+    addTitle: "Add Veterinary",
+    addSuccess: "Veterinary created successfully",
   },
   user: {
     viewTitle: "Users",
@@ -44,6 +52,7 @@ export const en = {
     submit: "Create User",
     basicInfo: "Basic Information",
     changeClinic: "Change Clinic",
+    changePermissions: "Change Permissions",
     error:{
       loading: "Error loading Users"
     },
@@ -54,6 +63,12 @@ export const en = {
       phoneRequired: 'Phone is required',
       emailInvalid: 'Invalid email address'
 
+    },
+    access:{
+      title: "Permission",
+      actor: 'Actor',
+      roles: 'Roles',
+      isActive: 'Active',
     },
 
   },
@@ -80,7 +95,6 @@ export const en = {
     active: 'Active',
     countryCode: 'Country Code',
     update: 'Update',
-
     clinic: 'Clinic',
     validation:{
       lastNameRequired: "Last Name Required",
@@ -89,8 +103,9 @@ export const en = {
       emailInvalid: "Invalid email address",
       phoneInvalid: "Invalid phone number",
       addressRequired: "Address Required",
-    }
-
+    },
+    createdAt: "Created At",
+    updatedAt: "Updated At",
   },
   settings:{
     language: "Select language",

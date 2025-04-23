@@ -59,9 +59,16 @@ const ViewClinic: React.FC = () => {
                     <Button
                         variant="outlined"
                         startIcon={<PersonAddIcon />}
-                        onClick={() => navigate(`/staff/clinics/${id}/owners/create`)}
+                        onClick={() => navigate(`/staff/clinics/${id}/owner/invite`)}
                     >
                         {t('clinic.addOwner')}
+                    </Button>
+                    <Button
+                        variant="outlined"
+                        startIcon={<PersonAddIcon />}
+                        onClick={() => navigate(`/staff/clinics/${id}/veterinarian/invite`)}
+                    >
+                        {t('clinic.addVeterinary')}
                     </Button>
                 </Stack>
             </Box>

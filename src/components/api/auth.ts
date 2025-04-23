@@ -19,7 +19,6 @@ export const logout = () => {
   Cookies.remove('accessToken')
   Cookies.remove('refreshToken')
   Cookies.remove('actor')
-
 }
 export const setToken = (accessToken : string) => {
    Cookies.set('accessToken', accessToken, { 

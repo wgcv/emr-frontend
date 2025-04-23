@@ -1,10 +1,11 @@
+
 export const es = {
   menu:{
     home: 'Inicio',
     clinics: 'Clínicas',
     users: 'Usuarios',
     createClinics: 'Crear clínicas',
-    createClinicOwner: 'Crear Propietario de Clínica',
+    inviteClinicOwner: 'Invitar Propietario de Clínica',
   },
   userMenu:{
     profile: 'Perfil',
@@ -20,6 +21,8 @@ export const es = {
     
     submit: 'Crear nueva Clínica',
     addOwner: "Añadir propietario",
+    addVeterinary: "Añadir veterinario",
+
     validation: {
       nameRequired: 'El nombre de la clínica es requerido',
       addressRequired: 'La dirección es requerida',
@@ -37,7 +40,13 @@ export const es = {
     },
     clinicOwner:{
       createTitle: "Crear Propietario de la clínica",
+      createSuccess: 'Propietario creado exitosamente',
+
     }
+  },
+  veterinary:{
+    addTitle: "Añadir Veterinario",
+    createSuccess: 'Veterinario creado exitosamente',
   },
   user: {
     viewTitle: "Usuarios",
@@ -45,8 +54,8 @@ export const es = {
     editTitle: "Editar Usuario",
     addTitle: "Agregar Usuario",
     submit: "Crear Usuario",
-    basicInfo: "Información Básica",
     changeClinic: "Cambiar clínica",
+    changePermissions: "Cambiar permisos",
     error:{
       loading: "Error al cargar Usuarios"
     },
@@ -56,7 +65,14 @@ export const es = {
       emailRequired: 'Email es requerido',
       phoneRequired: 'Número de teléfono es requerido',
       emailInvalid: 'Correo electrónico inválido'
-    },
+    },  
+     access:{
+      title: "Permisos",
+
+      actor: 'Actor',
+      roles: 'Roles',
+      isActive: 'Activo',
+    }
 
   },
   common:{
@@ -71,7 +87,7 @@ export const es = {
     email: "Correo electrónico",
     notFound: "Error, no se puede encontrar resultados",
     addressInfo: 'Información de la dirección',
-
+    basicInfo: 'Información Básica',
     addressLine1: 'Dirección Línea 1',
     addressLine2: 'Dirección Línea 2',
     city: 'Ciudad',
@@ -91,7 +107,9 @@ export const es = {
       emailInvalid: "Email es inválido",
       phoneInvalid: "Número de Teléfono es inválido",
       addressRequired: "Dirección es requerida",
-    }
+    },
+    createdAt: "Creado en",
+    updatedAt: "Actualizado en",
   },
   
   settings:{

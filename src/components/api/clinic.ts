@@ -38,7 +38,7 @@ export const searchClinics = async (page: number, rowsPerPage: number, search?: 
   return data;
 };
 
-export const createClinicOwner = async (user: ClinicUser): Promise<ClinicUser> => {
-  const { data } = await axiosClient.post<{ user: ClinicUser; message: string }>(`/clinics/owners`, user)
+export const inviteClinicOwner = async (user: ClinicUser): Promise<ClinicUser> => {
+  const { data } = await axiosClient.post<{ user: ClinicUser; message: string }>(`/clinics/owner`, user)
   return data.user
 };

@@ -3,13 +3,15 @@ import {
     Box,
     Button,
     Container,
+    MenuItem,
     Paper,
     styled,
     TextField,
     Typography,
 } from '@mui/material';
 
-import { createClinicOwner } from '@/components/api/clinic';
+import { invitationVeterinary } from '@/components/api/veterinary';
+
 import PhoneInputComponent from '@/components/common/PhoneInputComponent';
 import { ClinicUser } from '@/components/types/User.types';
 import { useMutation } from '@tanstack/react-query';
@@ -20,13 +22,21 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 
+import {
+    Chip,
+    FormControl,
+    FormHelperText,
+    InputLabel,
+    Select,
+} from '@mui/material';
+
 const StyledPaper = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(3),
     maxWidth: 600,
     margin: '0 auto',
 }));
 
-const CreateClinicOwner: React.FC = () => {
+const InviteVeterinary: React.FC = () => {
 
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -44,16 +54,19 @@ const CreateClinicOwner: React.FC = () => {
                 t('common.validation.phoneInvalid')
             )
             .required(t('common.validation.phoneRequired')),
+        roles: Yup.array()
+            .min(1, t('common.validation.roleRequired'))
+            .required(t('common.validation.roleRequired')),
     });
 
 
     const clinicOwnerMutation = useMutation({
-        mutationFn: createClinicOwner,
+        mutationFn: invitationVeterinary,
         onSuccess: () => {
             navigate('/staff/dashboard', {
                 state: {
                     snackbar: {
-                        message: t('clinic.messages.createSuccess'),
+                        message: t('veterinary.addSuccess'),
                         severity: 'success',
                     }
                 }
@@ -70,6 +83,7 @@ const CreateClinicOwner: React.FC = () => {
             lastName: '',
             phone: '',
             email: '',
+            roles: [],
             clinic: {
                 id: id || '',
                 name: '',
@@ -122,7 +136,7 @@ const CreateClinicOwner: React.FC = () => {
                     }}
                 >
                     <Typography component="h1" variant="h5" sx={{ mb: 3 }}>
-                        {t('clinic.clinicOwner.createTitle')}
+                        {t('veterinary.addTitle')}
                     </Typography>
 
                     <Box component="form" onSubmit={formik.handleSubmit} sx={{ width: '100%' }} noValidate>
@@ -173,7 +187,35 @@ const CreateClinicOwner: React.FC = () => {
                             autoComplete="email"
                         />
 
-
+                        <FormControl
+                            margin="normal"
+                            required
+                            fullWidth
+                            error={formik.touched.roles && Boolean(formik.errors.roles)}
+                        >
+                            <InputLabel id="roles-label">{t('common.role')}</InputLabel>
+                            <Select
+                                labelId="roles-label"
+                                id="roles"
+                                name="roles"
+                                multiple
+                                value={formik.values.roles || []}
+                                onChange={formik.handleChange}
+                                renderValue={(selected) => (
+                                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                                        {(selected as string[]).map((value) => (
+                                            <Chip key={value} label={t(`roles.${value}`)} />
+                                        ))}
+                                    </Box>
+                                )}
+                            >
+                                <MenuItem value="veterinarian">{t('roles.veterinarian')}</MenuItem>
+                                <MenuItem value="assistant">{t('roles.assistant')}</MenuItem>
+                            </Select>
+                            {formik.touched.roles && formik.errors.roles && (
+                                <FormHelperText>{formik.errors.roles as string}</FormHelperText>
+                            )}
+                        </FormControl>
                         {clinicOwnerMutation.isError && (
                             <Alert severity="error" sx={{ mt: 2 }}>
                                 {getErrorMessage(clinicOwnerMutation.error)}
@@ -196,4 +238,4 @@ const CreateClinicOwner: React.FC = () => {
     );
 };
 
-export default CreateClinicOwner;
+export default InviteVeterinary;

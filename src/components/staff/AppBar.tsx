@@ -40,23 +40,19 @@ function AppBar() {
                 { name: "View", url: "/staff/clinics" },
                 { name: "Divider", url: null },
                 { name: t("menu.createClinics"), url: "/staff/clinic/create" },
-                { name: t("menu.createClinicOwner"), url: "/staff/clinic/create-owner" }
+                { name: t("menu.inviteClinicOwner"), url: "/staff/clinic/create-owner" }
             ],
         }
     ]
 
     const userItems = [
         {
-            name: t("userMenu.profile"),
-            url: "staff/settings",
-        },
-        {
             name: t("userMenu.settings"),
             url: "staff/settings",
         },
         {
             name: t("userMenu.logout"),
-            url: "staff/settings",
+            url: "logout",
         },
     ]
 

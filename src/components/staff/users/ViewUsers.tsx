@@ -1,10 +1,8 @@
 import { getUsers } from '@/components/api/users';
 import { GetUserResponse } from '@/components/types/User.types';
-import { Add as AddIcon } from "@mui/icons-material";
 import SearchIcon from '@mui/icons-material/Search';
 import {
     Box,
-    Button,
     InputAdornment,
     Paper,
     Table,
@@ -96,19 +94,6 @@ const ViewUsers: React.FC = () => {
                         },
                     }}
                 />
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => navigate('/staff/users/create')}
-
-                    sx={{
-                        fontWeight: 500,
-                    }}
-                    startIcon={<AddIcon />}
-                >
-                    {t('common.create')}
-                </Button>
-
             </Box>
 
             <TableContainer

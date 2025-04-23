@@ -1,4 +1,3 @@
-import { getClinic } from '@/components/api/clinic';
 import { getUser } from '@/components/api/users';
 import InfoRow from '@/components/common/InfoRow';
 import { formatPhoneAndCode } from '@/components/common/utils/FormatPhone';
@@ -27,11 +26,7 @@ const ViewUser: React.FC = () => {
         queryFn: () => getUser(id as string),
     });
 
-    const { data: clinic } = useQuery({
-        queryKey: ['clinic', user],
-        queryFn: () => getClinic(String((user as ClinicUser)?.clinic)),
-        enabled: !!(user && 'clinic' in user),
-    });
+
 
     if (isLoading) {
         return (
@@ -63,36 +58,65 @@ const ViewUser: React.FC = () => {
                     >
                         {t('common.edit')}
                     </Button>
+                    {(user as ClinicUser)?.clinic && (
+
+                        <Button
+                            variant="contained"
+                            startIcon={<EditIcon />}
+                            onClick={() => navigate(`/staff/users/${id}/change-clinic`)}
+                        >
+                            {t('user.changeClinic')}
+                        </Button>
+                    )}
                     <Button
                         variant="contained"
                         startIcon={<EditIcon />}
-                        onClick={() => navigate(`/staff/users/${id}/change-clinic`)}
+                        onClick={() => navigate(`/staff/users/${id}/change-permissions`)}
                     >
-                        {t('user.changeClinic')}
+                        {t('user.changePermissions')}
                     </Button>
-
                 </Stack>
             </Box>
+            <Box>
+                <StyledPaper elevation={3}>
+                    <Typography variant="h5" sx={{ mb: 2 }}>
+                        {t("common.basicInfo")}
+                    </Typography>
+                    <InfoRow label={t('common.id')} value={user.id ? user.id : ''} />
+                    <InfoRow label={t('common.name')} value={user.name} />
+                    <InfoRow label={t('common.lastName')} value={user.lastName} />
+                    <InfoRow label={t('common.email')} value={user.email} />
+                    <InfoRow label={t('common.phone')} value={formatPhoneAndCode(user.phone).countryCode + " " + formatPhoneAndCode(user.phone).phoneNumber} />
+                </StyledPaper>
+            </Box>
+            <Box sx={{ mt: 6 }}>
+                <StyledPaper elevation={3}>
+                    <Typography variant="h5" sx={{ mb: 2 }}>
+                        {t("user.access.title")}
+                    </Typography>
+                    <InfoRow label={t('user.access.actor')} value={user.actor ? user.actor : ''} />
 
-            <StyledPaper elevation={3}>
-                <Typography variant="h5" sx={{ mb: 2 }}>
-                    {t("clinic.basicInfo")}
-                </Typography>
-                <InfoRow label={t('common.id')} value={user.id ? user.id : ''} />
-                <InfoRow label={t('common.name')} value={user.name} />
-                <InfoRow label={t('common.lastName')} value={user.lastName} />
-                <InfoRow label={t('common.email')} value={user.email} />
-                <InfoRow label={t('common.phone')} value={formatPhoneAndCode(user.phone).countryCode + " " + formatPhoneAndCode(user.phone).phoneNumber} />
-            </StyledPaper>
+                    <InfoRow label={t('user.access.roles')} value={user.roles ? user.roles : ''} />
+                    <InfoRow label={t('user.access.isActive')} value={user.isActive ? '✅' : '❌'} />
+                    <InfoRow
+                        label={t('common.createdAt')}
+                        value={user.createdAt ? new Date(user.createdAt).toLocaleString() : ''}
+                    />
+                    <InfoRow
+                        label={t('common.updatedAt')}
+                        value={user.updatedAt ? new Date(user.updatedAt).toLocaleString() : ''}
+                    />
+                </StyledPaper>
 
-            {clinic && (
+            </Box>
+            {(user as ClinicUser)?.clinic && (
                 <Box sx={{ mt: 6 }}>
                     <Typography variant="h5" >
                         {t('clinic.detailsTitle')}
                     </Typography>
                     <StyledPaper elevation={3} sx={{ mt: 3 }}>
 
-                        <ClinicInfoDisplayComponent clinic={clinic} linked={true} />
+                        <ClinicInfoDisplayComponent clinic={(user as ClinicUser)?.clinic} linked={true} />
                     </StyledPaper>
                 </Box>
             )}
